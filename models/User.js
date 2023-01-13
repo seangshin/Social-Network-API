@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
 
   //Add individual properties and their types
-  name: { type: String, required: true },
+  username: { type: String, required: true },
   //Use built-in date method to get current date
   lastAccessed: { type: Date, default: Date.now },
 });
@@ -18,7 +18,7 @@ const handleError = (err) => console.error(err);
 //create an individual document that have the properties as defined in the schema
 User.create(
   {
-    name: "Sean Shin",
+    username: "seangshin",
   },
   (err) => (err ? handleError(err) : console.log('Created new document'))
 );
