@@ -20,4 +20,17 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  //delete a user in User document
+  async deleteUser(req, res) {
+    try{
+      const userData = await User.findOneAndRemove({ _id: req.params.userId });
+      !userData 
+      ? res.status(404).json({ message: 'No user found' })
+      : Thought.deleteMany({ _id: { $in: userData.thoughts }});
+      res.json({ message: 'User and thoughts deleted!' });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 };
