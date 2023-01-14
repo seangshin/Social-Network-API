@@ -1,26 +1,38 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 //Create a new instance of the Mongoose scehma to define shape of each document
 const userSchema = new mongoose.Schema({
 
   //Add individual properties and their types
-  username: { type: String, required: true },
+  username: { type: String, required: true, unique: true, trim: true },
+  email: { type: String, required: true, unique: true,
+    //Add validate property to use the validator npm to check if email is valid
+    validate: {
+      validator: value => validator.isEmail(value),
+      message: '{VALUE} is not a valid email.'
+    }
+  },
+  //an arrary of 'ObjectId' values that reference a model for thoughts and friends
+  thoughts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Thought'
+  }],
+  friends: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Friend'
+  }],
   //Use built-in date method to get current date
   lastAccessed: { type: Date, default: Date.now },
 });
 
+//a virtual - a property of a schema that can be used to define a computed value based 
+//on other properties - which retrieves the length of the user's friends on query
+userSchema.virtual('friendCount').get(function() {
+  return friends.length;
+});
+
 //Using mongoose.model() to compile a model based on the schema
 const User = mongoose.model('User', userSchema);
-
-//Error handler function for errors when trying to save a document
-const handleError = (err) => console.error(err);
-
-//create an individual document that have the properties as defined in the schema
-User.create(
-  {
-    username: "seangshin",
-  },
-  (err) => (err ? handleError(err) : console.log('Created new document'))
-);
 
 module.exports = User;
