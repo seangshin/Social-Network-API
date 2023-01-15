@@ -32,7 +32,8 @@ userSchema.virtual('friendCount').get(function() {
   return friends.length;
 });
 
-//Using mongoose.model() to compile a model based on the schema
+//Using mongoose.model() to create a new MongoDB collection
+//and allows you to interact with is using the 'User' model
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
