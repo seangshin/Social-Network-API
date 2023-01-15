@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongoose').Types;
 const { User } = require('../models'); //import User model
 
 module.exports = {
@@ -5,7 +6,7 @@ module.exports = {
   async getUsers(req, res) {
     try {
       const userData = await User.find();
-      res.json(userData);
+      res.status(200).json(userData);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -15,7 +16,7 @@ module.exports = {
   async createUser(req, res) {
     try{
       const userData = await User.create(req.body);
-      res.json(userData);
+      res.status(200).json(userData);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -24,11 +25,10 @@ module.exports = {
   //delete a user in User document
   async deleteUser(req, res) {
     try{
-      const userData = await User.findOneAndRemove({ _id: req.params.userId });
-      !userData 
-      ? res.status(404).json({ message: 'No user found' })
-      : Thought.deleteMany({ _id: { $in: userData.thoughts }});
-      res.json({ message: 'User and thoughts deleted!' });
+      const userId = ObjectId(req.body.id)
+      const userData = await User.findOneAndRemove(userId);
+      if (!userData) return res.status(404).json('User not found');
+      res.status(200).json(`User with id ${req.body.id} was deleted.`);
     } catch (err) {
       res.status(500).json(err);
     }
