@@ -35,4 +35,16 @@ thoughtSchema.virtual('reactionCount').get(function() {
 //and allows you to interact with is using the 'User' model
 const Thought = mongoose.model('Thought', thoughtSchema);
 
+//*******Below code creates a document***** */
+// Thought.create(
+//   { thoughtText: 'Loreum', username : 'NA' },
+//   (err, data) => {
+//     if (err) {
+//       console.error(err);
+//     }
+//     console.log(data);
+//   }
+// );
+//************ */
+
 module.exports = Thought;

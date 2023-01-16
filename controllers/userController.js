@@ -25,10 +25,10 @@ module.exports = {
   //delete a user in User document
   async deleteUser(req, res) {
     try{
-      const userId = ObjectId(req.body.id)
+      const userId = ObjectId(req.body.id);
       const userData = await User.findOneAndRemove(userId);
       if (!userData) return res.status(404).json('User not found');
-      res.status(200).json(`User with id ${req.body.id} was deleted.`);
+      res.status(200).json(`User with id ${userId} was deleted.`);
     } catch (err) {
       res.status(500).json(err);
     }
