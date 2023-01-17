@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 
 //Child document or subdocuments embedded into parent document 
 const reactionSchema = new mongoose.Schema({
@@ -23,6 +24,15 @@ const thoughtSchema = new mongoose.Schema({
   reactions: [reactionSchema],
   //Use built-in date method to get current date
   lastAccessed: { type: Date, default: Date.now },
+});
+
+//pre middleware for adding the associated user id to the thought
+thoughtSchema.pre('save', function(next) {
+  const thoughtId = this._id;
+  User.findOne({ username: this.username }, function (err, user){
+    if (err) return handleError(err);
+    User.findByIdAndUpdate(user._id, { $push: { thoughts: thoughtId } }, next);
+  });
 });
 
 //a virtual - a property of a schema that can be used to define a computed value based 
