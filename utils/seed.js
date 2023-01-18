@@ -21,7 +21,6 @@ connection.once('open', async () => {
   { username: 'billsmith', email: 'billsmith@email.com' },
   { username: 'jillsmith', email: 'jillsmith@email.com' },
   ];
-
   const thoughts = [
   { thoughtText: 'Thought1', username: null },
   { thoughtText: 'Thought2', username: null },
@@ -29,12 +28,15 @@ connection.once('open', async () => {
   { thoughtText: 'Thought4', username: null },
   ];
 
+  //create new user documents
   const seededUsers = await User.create(usernames);
 
+  //loop through created users and add their ids to the thought array
   for (let i=0; i<seededUsers.length; i++) {
     thoughts[i].username = seededUsers[i]._id;
   }
 
+  //create new thought documents
   const seededThoughts = await Thought.create(thoughts);
   console.log(`Created ${thoughts.length} thoughts.`)
 
