@@ -45,9 +45,39 @@ module.exports = {
   //delete a thought in Thought document
   async deleteThought(req, res) {
     try{
-      const thoughtData = await Thought.findOneAndRemove(req.params.thoughtId);
+      const thoughtData = await Thought.findByIdAndRemove(req.params.thoughtId);
       if (!thoughtData) return res.status(404).json('Thought not found');
       res.status(200).json(`Thought with id ${req.params.thoughtId} was deleted.`);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  //create a reaction in Thought document for social-mediaDB collection
+  async createReaction(req, res) {
+    try{
+      const thoughtData = await Thought.findById(req.params.thoughtId);
+      if (!thoughtData) return res.status(404).json(`Thought not found.`);
+
+      const newReaction = { reactionBody: req.body.reactionBody , username: req.body.username }
+      thoughtData.reactions.push(newReaction);
+
+      await thoughtData.save();
+      res.status(200).json(thoughtData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  //delete a reaction in Thought document for social-mediaDB collection
+  async deleteReaction(req, res) {
+    try{
+      const thoughtData = await Thought.findById(req.params.thoughtId);
+      if (!thoughtData) return res.status(404).json(`Thought not found.`);
+      thoughtData.reactions.pull({ _id: req.body._id });
+
+      await thoughtData.save();
+      res.status(200).json(`Reaction deleted.`);
     } catch (err) {
       res.status(500).json(err);
     }
