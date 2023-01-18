@@ -4,7 +4,7 @@ API for a social network web application where users can share their thoughts an
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
  ![](/screenshot.JPG)
  
-Link to walkthrough video: https://safe-harbor-99168.herokuapp.com/
+Link to walkthrough video: https://drive.google.com/file/d/1Yof1D1ll6ijGt8upT3-P6I03Wd9AzyZJ/view
 
 ## Description
 The motivation of this project is to build a back
