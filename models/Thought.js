@@ -39,6 +39,10 @@ thoughtSchema.virtual('reactionCount').get(function() {
   return reactions.length;
 });
 
+thoughtSchema.virtual('formatTimestamp').get(function() {
+  return this.createdAt.toLocaleString();
+})
+
 //Using mongoose.model() to create a new MongoDB collection
 //and allows you to interact with is using the 'User' model
 const Thought = mongoose.model('Thought', thoughtSchema);
