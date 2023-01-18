@@ -1,4 +1,4 @@
-const { User, Thought } = require('../models'); //import Thought model
+const { Thought } = require('../models'); //import Thought model
 
 module.exports = {
   //get all thoughts in Thought document for social-mediaDB collection
@@ -45,7 +45,7 @@ module.exports = {
   //delete a thought in Thought document
   async deleteThought(req, res) {
     try{
-      const thoughtData = await Thought.findByIdAndRemove(req.params.thoughtId);
+      const thoughtData = await Thought.findByIdAndDelete(req.params.thoughtId);
       if (!thoughtData) return res.status(404).json('Thought not found');
       res.status(200).json(`Thought with id ${req.params.thoughtId} was deleted.`);
     } catch (err) {

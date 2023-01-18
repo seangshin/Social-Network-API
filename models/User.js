@@ -20,18 +20,21 @@ const userSchema = new mongoose.Schema({
   }],
   friends: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Friend'
+    ref: 'User'
   }],
   //Use built-in date method to get current date
   lastAccessed: { type: Date, default: Date.now },
 });
 
 //Use the 'pre' middleware to remove associated thoughts when a user is removed
-// userSchema.pre('remove', function(next) {
-//   console.log('user middleware');
-//   next();
-//   //Thought.remove({ _id: { $in: this.thoughts } }, next);
-// });
+userSchema.pre('remove', async function(next) {
+  try{
+    await mongoose.model('Thought').deleteMany({ username: this._id });
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 //a virtual - a property of a schema that can be used to define a computed value based 
 //on other properties - which retrieves the length of the user's friends on query
