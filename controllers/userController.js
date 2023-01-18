@@ -1,4 +1,4 @@
-const { User, Thought } = require('../models'); //import User model
+const { User } = require('../models'); //import User model
 
 module.exports = {
   //get all users in User document for social-mediaDB collection
@@ -45,8 +45,9 @@ module.exports = {
   //delete a user in User document
   async deleteUser(req, res) {
     try{
-      const userData = await User.findByIdAndDelete(req.params.userId);
+      const userData = await User.findById(req.params.userId);
       if (!userData) return res.status(404).json('User not found');
+      userData.remove();
       res.status(200).json(`User with id ${req.params.userId} was deleted.`);
     } catch (err) {
       res.status(500).json(err);
