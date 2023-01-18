@@ -5,7 +5,7 @@ module.exports = {
   async getThoughts(req, res) {
     try {
       const thoughtData = await Thought.find();
-      //thoughtData.formattedTimestamp;
+      thoughtData.formattedTimestamp;
       res.status(200).json(thoughtData);
     } catch (err) {
       res.status(500).json(err);
