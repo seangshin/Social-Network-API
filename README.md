@@ -1,58 +1,37 @@
 # social-network-API
-API for a social network web application where users can share their thoughts and interact with their friends. It features an Express.js to handle HTTP requests and interacts with a MongoDB (NoSQL) database using the Mongoose ODM library, known for high scalability due to its speed with large amounts of data and flexibility with unstructured data.
-
- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
- ![](/screenshot.JPG)
- 
-Link to walkthrough video: https://drive.google.com/file/d/1Yof1D1ll6ijGt8upT3-P6I03Wd9AzyZJ/view
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
-The motivation of this project is to build a back
-Content Management System (CMS) e-commerce site, where users can post items for sale and other users can place bids on the item. The user can specify when the post expires to secure the highest bidder and proceed with item transactions. 
-
-The application follows the Model View Controller (MVC) architecture and uses Node.js & Express.js to create a RESTful API. It uses Handlebars.js as the template engine, MySQL as the relational database management system, and Sequelize as the Object Relational Mapper (ORM). It also uses the express-session npm package for authentication and the nodemailer npm package for website notifications via email. The application supports user registration and authentication features by storing user session data as a cookie and implementing packages such as bcrypt and dotenv to protect API keys and sensitive information with environment variables.
+The motivation of this project is to build a social media API using Mongoose (MongoDB ODM) and Node.js. It defines the data models for the API, such as User and Thoughts, by setting up a MongoDB database and connecting it using Mongoose. It interacts with the data models using Mongoose schemas and also features built-in virtuals and middleware. The routes for the API are set up using Express.js and the application implements CRUD functionality for each model using Mongoose methods. It features server-side validation for incoming data using validator.js. In addition, the application adheres to the Model-View-Controller architecuture.
 
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
-- [Contributions](#contributions)
-- [Tests](#tests)
 - [Questions](#questions)
   
 ## Installation
-The following tools were used for development and testing of this project: Code development IDE (Microsoft VS Code), node.js (JavaScript runtime environment), npm (software registry containing inquirer).
+The following tools were used for development and testing of this project: Code development IDE (Microsoft VS Code), node.js (JavaScript runtime environment), npm (software registry containing inquirer), insomnia (REST client).
 
 The following npm packages are required:
-* mysql2 ^2.2.5
-* bcrypt ^5.0.0
-* connect-session-sequelize ^7.0.4
-* dotenv ^8.2.0
-* express ^4.18.2
-* express-handlebars ^5.2.0
-* express-session ^1.17.1
-* moment ^2.29.4
-* nodemailer ^6.8.0
-* sequelize ^6.3.5
+* mongoose ^6.0.13
+* express ^4.17.1
+* validator ^13.7.0
   
 ## Usage
-The application is deployed to heroku via the following link: https://safe-harbor-99168.herokuapp.com/
+Link to walkthrough video: https://drive.google.com/file/d/1Yof1D1ll6ijGt8upT3-P6I03Wd9AzyZJ/view
+
+The application is invoked using the following commands:
+$ npm run seed
+$ npm start
   
 ## Credits
 Georgia Tech Coding Bootcamp instructors, TA's, and other faculty.
 
 ## License
 MIT
-
-## Contributions
-seangshin, victor5055, JaredW1911
-
-## Tests
-For development, the application requires the heroku CLI to seed the database when the application is first deployed. Run the following commands in the terminal:
->heroku run bash
-~ $ npm run seed
   
 ## Questions
-GitHub URL: https://github.com/seangshin, https://github.com/victor5055, https://github.com/JaredW1911
-Reach our team with additional questions at shin.seang@gmail.com, victor5055@outlook.com, jaredwilliams1019@gmail.com
+GitHub URL: https://github.com/seangshin
+Reach out additional questions at shin.seang@gmail.com
