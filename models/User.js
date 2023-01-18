@@ -26,17 +26,18 @@ const userSchema = new mongoose.Schema({
   lastAccessed: { type: Date, default: Date.now },
 });
 
+//Use the 'pre' middleware to remove associated thoughts when a user is removed
+// userSchema.pre('remove', function(next) {
+//   console.log('user middleware');
+//   next();
+//   //Thought.remove({ _id: { $in: this.thoughts } }, next);
+// });
+
 //a virtual - a property of a schema that can be used to define a computed value based 
 //on other properties - which retrieves the length of the user's friends on query
 userSchema.virtual('friendCount').get(function() {
   return friends.length;
 });
-
-//Use the 'pre' middleware to remove associated thoughts when a user is removed
-// userSchema.pre('remove', async function(next) {
-//   await Thought.deleteMany({ user: this._id });
-//   next();
-// });
 
 //Using mongoose.model() to create a new MongoDB collection
 //and allows you to interact with is using the 'User' model
